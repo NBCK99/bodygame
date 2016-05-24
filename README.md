@@ -73,3 +73,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 If you have questions, feel free to email me at hymanator93@gmail.com, or open an issue on this github repo.
+
+# Version
+The current version of this program is 0.0.16w21a.
