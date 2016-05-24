@@ -45,7 +45,9 @@ This Python code is released under the MIT License, found below.
 
 This code has been made available under this license by its creator free of charge.
 If you wish to donate to the developer, Chris Hyman, you may send your generous gift to:
+
 Paypal: hymanator93@gmail.com
+
 Please feel no obligation to donate in order to enjoy this program.
 
 MIT License
@@ -70,4 +72,4 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-If you have questions, feel free to email me at hymanator93@gmail.com
+If you have questions, feel free to email me at hymanator93@gmail.com, or open an issue on this github repo.
