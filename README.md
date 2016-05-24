@@ -1,8 +1,7 @@
 #Bodygame.py
 A Python program that creates an instance of the Body Game inspired by Brian Ramirez Kyle.
 
-
-Credits, inspiration, and explanation
+Note: This repo is NSFW, 18+ content.
 
 This is a Python program to generate an instance (Encounter) of the Body Game.
 The Body Game was devised by Brian Ramirez Kyle, and his story directly inspired
