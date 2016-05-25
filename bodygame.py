@@ -1,4 +1,5 @@
-# Version 0.0.16w21a
+# Version 0.1.16w21b
+# https://github.com/chrhyman/bodygame
 
 ##################################
 # Credits, inspiration, and explanation
@@ -73,9 +74,10 @@
 ##################################
 
 ##################################
-# If you have questions, feel free to email me at hymanator93@gmail.com
+# If you have questions, feel free to email me at chrhyman@gmail.com
+# or to create an issue on the github repo: 
+# https://github.com/chrhyman/bodygame/issues
 ##################################
-
 
 # bodygame.py
 
@@ -109,8 +111,6 @@ def lbtokg(n):
 
 p = random.randint(5,7)
 
-print 'There are ' + str(p) + ' players.\n\n'
-
 ##################################
 # Global list of players who are targeted by someone.
 # Ensures that all players are targeted.
@@ -139,7 +139,7 @@ class Player:
 		self.weig = 0
 		self.shoe = 0
 		self.clen = 0
-		self.cwid = 0
+		self.cwid = ''
 		self.hair = ''
 		self.feel = ''
 		self.targ = 0
@@ -189,13 +189,14 @@ class Player:
 		self.shoe = random.randint(7,14) # US
 
 	# Starting cock length in inches. Returns a float rounded to tenths.
-	# Change "3.5" or "10.0" to affect range. "1" is just the rounding.
+	# Change "4.0" or "10.0" to affect range. "1" is just the rounding.
 	def gClen(self):
-		self.clen = round(random.uniform(3.5,10.0), 1)
+		self.clen = round(random.uniform(4.0,10.0), 1)
 
-	# Starting cock width in inches. Same as above.
+	# Starting cock shape. Used to be 'width' in inches. Add shapes (adj) as you please.
 	def gCwid(self):
-		self.cwid = round(random.uniform(0.75, 3.0), 1)
+		pCwids = ['wide','thick','narrow','extra-wide','torpedo-shaped','cobra-shaped']
+		self.cwid = random.choice(pCwids)
 
 	# Kind of a random one, another writing aide I suppose.
 	# natural is a list of possible natural hair colors.
@@ -270,11 +271,11 @@ for i in range (0, p):
 def gamestate(z):
 	az = str(z+1)
 	atar = str(players[z].targ + 1)
-	current = 'Player ' + az + '\nName: ' + players[z].name + '\nAge: ' + str(players[z].agee) \
-		+ '\nHeight: ' + intoft(players[z].heig) + '\nWeight: ' + \
-		str(players[z].weig) + 'lb.\nShoe size: ' + str(players[z].shoe) + '\nCock length: ' + \
-		str(players[z].clen) + 'in.\nCock width: ' + str(players[z].cwid) + \
-		'in.\nNotes: ' + str(players[z].notes) + '\n'
+	current = 'Player ' + az + '\nName: ' + players[z].name + '\nAge: ' + \
+		str(players[z].agee) + '\nHeight: ' + intoft(players[z].heig) + '\nWeight: ' + \
+		str(players[z].weig) + 'lb.\nShoe size: ' + str(players[z].shoe) + \
+		'\nCock length: ' + str(players[z].clen) + 'in.\nCock shape: ' + players[z].cwid \
+		+ '\nNotes: ' + str(players[z].notes) + '\n'
 	print current
 
 ##################################
@@ -289,14 +290,13 @@ def verbose():
 		nmheig = intomt(players[i].heig)
 		nmweig = lbtokg(players[i].weig)
 		nmclen = intocm(players[i].clen)
-		nmcwid = intocm(players[i].cwid)
 		display = '''Player {0}\'s name is {1}, {2} years old. He is {3}.
 He\'s {4} tall ({5}) and weighs {6}lb ({7}). {1} wears a size {8} shoe.
-His cock is {9}in. long ({10}) and {11}in. wide ({12}).
-His hair is {13}. He\'s feeling {14}. His target is player {15}.'''
+His {11}{12} cock is {9}in. long ({10}). His hair is {13}. He\'s feeling
+{14}. His target is player {15}.'''
 		print display.format(ai, players[i].name, players[i].agee, players[i].ethn, 
 			nheig, nmheig, players[i].weig, nmweig, players[i].shoe, players[i].clen, 
-			nmclen, players[i].cwid, nmcwid, players[i].hair, players[i].feel, atar)+'\n'
+			nmclen, players[i].cwid, '', players[i].hair, players[i].feel, atar)+'\n'
 
 ##################################
 # Global dictionaries that hold Player:Attribute pairs
@@ -459,8 +459,10 @@ def override(s, t):
 			results[5].append(findplayer(outcome[0], False))
 		else:
 			results[5].append(700)	# Error ID.
+	elif (outcome[0] == 8):
+		results[5].append(t)
 	else:
-		results[5] = None
+		results[5] = 'error 200'
 	if outcome[2]:					# If IN ADDITION, append original target.
 		results[5].append(t)
 	return results
@@ -494,17 +496,54 @@ def decipher(list):
 	return string
 
 ##################################
+# Defines changes and picks one at random when called.
+# Returns a change list including the targets in tar.
+##################################
+def pickchange(tar):
+	change = []
+	return change
+
+##################################
+# write change in ch to targets in ch
+##################################
+def wnote(ch):
+	pass
+
+##################################
+# if change modifies another attribute, apply that modification using the change in ch
+# and the target(s) in tar
+##################################
+def moda(ch, tar):
+	pass
+
+##################################
+# Makes a change
+##################################
+def makechange(tarlist):
+	if tarlist == []: print 'No changes.'
+	else:
+		# pick a random change
+		# send the verbose to each player's notes
+		# if modifiable, modify attributes
+		# print changes or errors
+		ch = pickchange(tarlist)
+		wnote(ch)
+		if ch == '':
+			moda(ch)
+		print 'Transform: ' + str(ch)+'\n'
+
+##################################
 # Defines a single turn by one player.
 # Sender a, target b, and with c overrides.
 ##################################
 def turn(a, b, c):
 	orides = override(a, b)
 	orides2 = override(a, b)
-	mtars = []
+	mtars = []	# A list of targets to affect.
 	ps = ''
 	if (c==0):
 		print 'Override: None.'
-		orides = False
+		orides = [999,'none',False,False,False,[b]]
 		orides2 = False
 	elif (c==1):
 		orides2 = False
@@ -512,7 +551,8 @@ def turn(a, b, c):
 	elif (c==2):
 		print 'Override: ' + decipher(orides) + '\nand Override: ' + decipher(orides2)
 	else:
-		orides = [404,'error',False,False,False,None] # error ID
+		orides = [400,'error',False,False,False,None] # error ID
+		print 'Error 400'
 	if orides:
 		if orides[5]: mtars.extend(orides[5])
 	if orides2:
@@ -526,6 +566,7 @@ def turn(a, b, c):
 	ps = ps[:-2]
 	ps += ')'
 	if len(mtars) > 0: print ps
+	makechange(mtars)
 
 ##################################
 # Defines a single round. Executes round number r.
@@ -551,7 +592,7 @@ def round(r):
 
 	# Iterates over the players and gives each gamestate. Put a # at the beginning
 	# of each of the next three lines if this is too much text and you want to cut down.
-	print '\nThat is the end of round {}. Current player stats:\n\n'.format(r)
+	print '\nThat is the end of round {}. Current player stats:\n'.format(r)
 	for i in range(0,p):
 		gamestate(i)
 
@@ -560,6 +601,7 @@ def round(r):
 ##################################
 def game():
 	print 'Welcome to the Body Game!\n\n'
+	print 'There are ' + str(p) + ' players.\n\n'
 	verbose()
 	for i in range(1,10):	# there are 9 rounds
 		round(i)
