@@ -1,4 +1,4 @@
-# Version 0.1.16w21b
+# Version 0.7.16w21c
 # https://github.com/chrhyman/bodygame
 
 ##################################
@@ -195,7 +195,8 @@ class Player:
 
 	# Starting cock shape. Used to be 'width' in inches. Add shapes (adj) as you please.
 	def gCwid(self):
-		pCwids = ['wide','thick','narrow','extra-wide','torpedo-shaped','cobra-shaped']
+		pCwids = ['wide','thick','narrow','extra-wide','torpedo-shaped','cobra-shaped',
+			'flared']
 		self.cwid = random.choice(pCwids)
 
 	# Kind of a random one, another writing aide I suppose.
@@ -459,7 +460,7 @@ def override(s, t):
 			results[5].append(findplayer(outcome[0], False))
 		else:
 			results[5].append(700)	# Error ID.
-	elif (outcome[0] == 8):
+	elif (outcome[0] == 8):			# if NONE/OTHER, original target remains
 		results[5].append(t)
 	else:
 		results[5] = 'error 200'
@@ -496,15 +497,131 @@ def decipher(list):
 	return string
 
 ##################################
+# Takes an iterable of of two-item iterables. Returns a random first element chosen
+# using the weight of the second element. Example: wchoice([('x',10),('y',400),('z',1)])
+##################################
+def wchoice(choices):
+   total = sum(w for c, w in choices)
+   r = random.uniform(0, total)
+   upto = 0
+   for c, w in choices:
+      if upto + w >= r:
+         return c
+      upto += w
+   assert False, "Error 100: Weighted choice failure"
+
+##################################
+# A global of all categories for changes and their respective weights. Weight can be any
+# positive integer (their relative distances determine weight).
+##################################
+cats = ['less defined', 'narrower', 'smaller', 'shorter', 'higher', 'less hairy',
+	'decrease', 'more defined', 'wider', 'larger', 'longer', 'deeper', 'hairier',
+	'increase', 'stronger', 'thicker', 'more cocklike', 'more contagious', 'more massive',
+	'more attractive', 'doubled', 'halved', 'into cock', 'quantity increase', 'inflation',
+	'nipple cum', 'constantly']
+
+wei = [20, 15, 35, 20, 3, 20, 35, 100, 75, 175, 100, 15, 100, 175, 100, 100, 75, 25, 100,
+	150, 125, 50, 40, 50, 25, 10, 20]
+
+##################################
+# A list of tuples. The second element in each tuple is the weight. The first element is
+# a list itself. The first element of the list is an ID number, second is the category.
+# Can be passed directly to wchoice() to select a category according to the weights.
+##################################
+wncats = [([i, cats[i]], wei[i]) for i in range(len(cats))]
+
+##################################
+# A global list of body parts to change, made into a list paired with ID number
+##################################
+parts = ['age', 'arms', 'ass', 'attractiveness', 'balls', 'belly', 'body', # 0-6
+	'cock', 'coming', 'come production', 'cuteness', 'face', 'feet', 'hair', # 7-13
+	'hairiness', 'hands', 'hard', 'head', 'height', 'horniness', 'horny', 'legs', # 14-21
+	'muscles', 'needs something in ass', 'nipples', 'pecs', 'thighs', 'toes', # 22-27
+	'tongue', 'torso', 'weight', 'voice', 'player', False] # 28-33
+nparts = [[i, parts[i]] for i in range(len(parts))]
+
+##################################
+# Picks something to affect based on the category chosen.
+##################################
+def pickpart(cat):
+	if cat == 0: poss = [nparts[2], nparts[25]]
+	elif cat == 1: poss = [nparts[7], nparts[28]]
+	elif cat == 2: poss = [nparts[7], nparts[12], nparts[6]]
+	elif cat == 3: poss = [nparts[7], nparts[13], nparts[21], nparts[28]]
+	elif (cat == 4 or cat == 11): poss = [nparts[31]]
+	elif (cat == 5 or cat == 12): poss = [nparts[1], nparts[2], nparts[6], nparts[11], 
+		nparts[21], nparts[25], nparts[29]]
+	elif cat == 6: poss = [nparts[0], nparts[10], nparts[14], nparts[18], nparts[30]]
+	elif cat == 7: poss = [nparts[1], nparts[2], nparts[6], nparts[21], nparts[22],
+		nparts[25], nparts[26], nparts[29]]
+	elif cat == 8: poss = [nparts[2], nparts[7], nparts[12], nparts[28]]
+	elif cat == 9: poss = [nparts[1], nparts[2], nparts[4], nparts[5], nparts[6],
+		nparts[7], nparts[12], nparts[15], nparts[21], nparts[22], nparts[24], nparts[25],
+		nparts[26], nparts[28]]
+	elif cat == 10: poss = [nparts[1], nparts[7], nparts[13], nparts[21], nparts[28],
+		nparts[29]]
+	elif cat == 13: poss = [nparts[0], nparts[9], nparts[10], nparts[3], nparts[19],
+		nparts[18], nparts[30], nparts[22], nparts[14]]
+	elif cat == 14: poss = [nparts[1], nparts[21], nparts[26], nparts[25], nparts[29],
+		nparts[6]]
+	elif cat == 15: poss = [nparts[1], nparts[21], nparts[26], nparts[25], nparts[2],
+		nparts[6], nparts[28]]
+	elif cat == 16: poss = [nparts[27], nparts[28], nparts[24]]
+	elif cat == 17: poss = [nparts[19]]
+	elif cat == 18: poss = [nparts[28], nparts[7], nparts[4], nparts[25], nparts[22],
+		nparts[2]]
+	elif cat == 19: poss = [nparts[25], nparts[7], nparts[31], nparts[29], nparts[12],
+		nparts[11], nparts[6], nparts[24], nparts[14], nparts[2]]
+	elif cat == 20: poss = [nparts[1], nparts[3], nparts[6], nparts[7],
+		nparts[9], nparts[10], nparts[14], nparts[18], nparts[19], nparts[21], nparts[30],
+		nparts[32]]
+	elif cat == 21: poss = [nparts[18], nparts[30], nparts[14]]
+	elif cat == 22: poss = [nparts[21], nparts[27], nparts[28], nparts[24]]
+	elif cat == 23: poss = [nparts[21], nparts[1], nparts[7], nparts[6]]
+	elif cat == 24: poss = [nparts[5], nparts[4], nparts[7], nparts[25], nparts[17]]
+	elif cat == 25: poss = [nparts[33]]
+	elif cat == 26: poss = [nparts[16], nparts[8], nparts[20], nparts[23]]
+	else: poss = [[250,'error']]
+	return random.choice(poss)
+
+##################################
+# Picks the amount of change to make, if applicable
+##################################
+def howmuch(cat, part):
+	if (cat in [20, 21, 22, 24, 25, 26]):
+		return False
+	elif (cat == 23):
+		if part in [21, 1]: return wchoice([(2,100),(4,10),(6,1)])	# arms and legs
+		elif part == 7: return wchoice([(1,100),(2,30),(3,10),(4,1)])	# cocks
+		else: return 1	# body only can increase +1 at a time
+	else:	# return a percentage
+		return wchoice([(10, 30), (20, 125), (30, 175), (40, 200), (50, 150), (60, 100),
+			(70, 50), (80, 25), (90, 10), (100, 1)])
+
+##################################
+# A global list for a change that pickchange() redefines. Also acts as var template.
+##################################
+change = ['targets', 'category ID', 'category in words', 'affected ID',
+	'affected in words', 'degree of change']
+
+##################################
 # Defines changes and picks one at random when called.
 # Returns a change list including the targets in tar.
 ##################################
 def pickchange(tar):
-	change = []
+	change[0] = tar
+	q1 = wchoice(wncats)
+	change[1] = q1[0]
+	change[2] = q1[1]
+	q2 = pickpart(change[1])
+	change[3] = q2[0]
+	change[4] = q2[1]
+	q3 = howmuch(change[1], change[3])
+	change[5] = q3
 	return change
 
 ##################################
-# write change in ch to targets in ch
+# write change in ch to notes of all targets
 ##################################
 def wnote(ch):
 	pass
@@ -519,14 +636,14 @@ def moda(ch, tar):
 ##################################
 # Makes a change
 ##################################
-def makechange(tarlist):
-	if tarlist == []: print 'No changes.'
+def makechange(tar):
+	if tar == []: print 'No changes.'
 	else:
 		# pick a random change
 		# send the verbose to each player's notes
 		# if modifiable, modify attributes
 		# print changes or errors
-		ch = pickchange(tarlist)
+		ch = pickchange(tar)
 		wnote(ch)
 		if ch == '':
 			moda(ch)
@@ -593,8 +710,7 @@ def round(r):
 	# Iterates over the players and gives each gamestate. Put a # at the beginning
 	# of each of the next three lines if this is too much text and you want to cut down.
 	print '\nThat is the end of round {}. Current player stats:\n'.format(r)
-	for i in range(0,p):
-		gamestate(i)
+	for i in range(0,p): gamestate(i)
 
 ##################################
 # Creates and initiates the game.
