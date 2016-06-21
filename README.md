@@ -36,9 +36,9 @@ This Python code is released under the MIT License, found below.
 This code has been made available under this license by its creator free of charge.
 If you wish to donate to the developer, Chris Hyman, you may send your generous gift to:
 
-Paypal: hymanator93@gmail.com
-Bitcoin: 1ChrisUZZVzZKnGDbcq5owpuqMHsVBc9TV
-Ether: 0x1ffce080248ac918d14f354bf9021dde54ba34c7
+* Paypal: hymanator93@gmail.com
+* Bitcoin: 1ChrisUZZVzZKnGDbcq5owpuqMHsVBc9TV
+* Ether: 0x1ffce080248ac918d14f354bf9021dde54ba34c7
 
 Please feel no obligation to donate in order to enjoy this program.
 
