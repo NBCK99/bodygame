@@ -1,12 +1,15 @@
 Note: This repo is NSFW, 18+ content.
 
-# Version
-The current version of this program is 1.1.0, stable.
+## Version
+The current version of this program is **1.1.0**, stable.
 
-# How to Use
+## What Does It Do?
+This program creates an instance of the Body Game devised by Brian Ramirez Kyle. A random number of players are generated within certain parameters (variable ranges like age, height, weight, cock length, and so on are used), and then these players undergo random changes over the course of the game. The program is intended to give a skeleton outline for stories written in this format. You can see a sample of the sort of output this program generates [here](../master/sampleoutput.txt).
+
+## How to Use
 For macOS and other UNIX systems, you will already have Python installed. For users who do not have it installed, simply visit python.org and follow their instructions.
 
-Download (clone) this repository to your local machine. Edit names.txt and vars.py as you wish. From the command line, navigate to the directory of this repo. For example:
+Clone or download this repository to your local machine. From the command line, navigate to the directory of this repo. For example:
 
     cd ~/Desktop/bodygame
 
@@ -14,23 +17,9 @@ would work for Mac users with this directory on their desktop. Then call:
 
     python bodygame.py
 
-(Or 'py bodygame.py' or 'python3 bodygame.py'.) By default, the program will create "output.txt" where you will find your story skeleton! (If you want to display output in the console, change write_to_txt in vars.py to False.
+(Or 'py bodygame.py' or 'python3 bodygame.py'.) By default, the program will create "output.txt" where you will find your story skeleton! If you want to display output in the console, change write_to_txt in vars.py to False. In fact, [vars.py](../master/vars.py) has many easy-to-edit variables to customize your output.
 
-#More Info
-**bodygame.py** is a Python program that creates an instance of the Body Game, which was devised by Brian Ramirez Kyle. His story (which can be found here: http://www.metabods.com/mb/stories/Body_game.html) directly inspired this program.
-
-Another author, matt1008, wrote another Encounter for the Body Game, also inspired by BRK. Additionally, as I've created this program, BRK has begun a new story in this format, Encounter 813. Both of these can also be found on Metabods.
-
-The idea of the Body Game is an experimental erotic story format. BRK used Excel spreadsheets and lots of formulae to generate the skeleton of a story wherein players of a mysterious and futuristic game experience randomly chosen changes to their bodies, with overrides throwing in more randomness.
-
-In this program, I have tried my hand at making a program in Python that automatically generates the same sort of skeleton outline of a story. After talking a bit to Brian I got his spreadsheets to help inspire me a bit, and so I could include some things that haven't made it into stories yet. Not everything from his work is in this program, and not everything in this program directly correlates to another person's creations. I cherish collaboration.
-
-On that note, I'm an entirely self-taught coder. I'd seriously appreciate any feedback on my style or implementation. I know I'm sometimes doing something the hard way, but it's often the solution that makes most intuitive sense to me. The problem is I don't learn by relying on my intuition!
-
-Feel free to edit any part of this code except the license information. You might want to add possible changes or edit the starting ranges for your players. A list of simple, easy-to-edit variables can be found in vars.py. I've left lots of comments to help you find your way around customizing things even if you're pretty code illiterate.
-
-If you have anything you want to discuss (feedback, suggestions, feature requests, bug reports), please open an issue in the Issues tab or email me privately at chrhyman@gmail.com
-
+## Free use
 This Python code is released under the MIT License, found below.
 
 This code has been made available under this license by its creator free of charge.
@@ -42,7 +31,22 @@ If you wish to donate to the developer, Chris Hyman, you may send your generous 
 
 Please feel no obligation to donate in order to enjoy this program.
 
-#License
+## More Info
+**bodygame.py** is a Python program that creates an instance of the Body Game, which was devised by Brian Ramirez Kyle. His story (which can be found [here](http://www.metabods.com/mb/stories/Body_game.html) on Metabods) directly inspired this program.
+
+Another author, matt1008, wrote another Encounter for the Body Game, also inspired by BRK. Additionally, as I've created this program, BRK has begun a new story in this format, Encounter 813. Both of these works can also be found on Metabods.
+
+The idea of the Body Game is an experimental erotic story format. BRK used Excel spreadsheets and lots of formulae to generate the skeleton of a story wherein players of a mysterious and futuristic game experience randomly chosen changes to their bodies, with overrides throwing in more randomness.
+
+In this program, I have tried my hand at making a program in Python that automatically generates the same sort of skeleton outline of a story. After talking a bit to Brian I got his spreadsheets to help inspire me a bit, and so I could include some things that haven't made it into stories yet. Not everything from his work is in this program, and not everything in this program directly correlates to another person's creations. I cherish collaboration!
+
+On that note, I'm an entirely self-taught coder. I'd seriously appreciate any feedback on my style or implementation. I know I'm sometimes doing things the hard way, but it's often the solution that makes most intuitive sense to me. The problem is, I don't learn much by relying on intuition!
+
+Feel free to edit any part of this code except the license information. You might want to add possible changes or edit the starting ranges for your players. A list of simple, easy-to-edit variables can be found in vars.py. I've left lots of comments to help you find your way around customizing things even if you're unfamiliar with Python or coding in general.
+
+If you have anything you want to discuss (feedback, suggestions, feature requests, bug reports), please open an issue in the Issues tab or email me privately at chrhyman@gmail.com
+
+## License
 MIT License
 
 Copyright (c) 2016 Chris Hyman
